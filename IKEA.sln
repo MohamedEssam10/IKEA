@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34928.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IKEA.PL", "IKEA.PL\IKEA.PL.csproj", "{2ABF7F52-2653-429C-A82F-79F99C675116}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IKEA.BLL", "IKEA.BLL\IKEA.BLL.csproj", "{E995214C-12D2-4E8C-8977-BC3D8D3881DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IKEA.DAL", "IKEA.DAL\IKEA.DAL.csproj", "{B947F377-F9BB-4747-9529-4ABF10609197}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2ABF7F52-2653-429C-A82F-79F99C675116}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ABF7F52-2653-429C-A82F-79F99C675116}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ABF7F52-2653-429C-A82F-79F99C675116}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ABF7F52-2653-429C-A82F-79F99C675116}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E995214C-12D2-4E8C-8977-BC3D8D3881DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E995214C-12D2-4E8C-8977-BC3D8D3881DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E995214C-12D2-4E8C-8977-BC3D8D3881DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E995214C-12D2-4E8C-8977-BC3D8D3881DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B947F377-F9BB-4747-9529-4ABF10609197}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B947F377-F9BB-4747-9529-4ABF10609197}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B947F377-F9BB-4747-9529-4ABF10609197}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B947F377-F9BB-4747-9529-4ABF10609197}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BB280C9E-DF8A-4C39-8AC6-A40DD4F5CD24}
+	EndGlobalSection
+EndGlobal
