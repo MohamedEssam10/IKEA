@@ -14,7 +14,7 @@ namespace IKEA.PL
             builder.Services.AddControllersWithViews();
 
 
-            
+            // Apply Dependency Injection to DbContext
             builder.Services.AddDbContext<ApplicationDbContext>((optionsbuilder) =>
             {
                 optionsbuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
