@@ -1,6 +1,7 @@
+using IKEA.BLL.Services.Departments;
 using IKEA.DAL.Data;
+using IKEA.DAL.Repositories.Departments;
 using Microsoft.EntityFrameworkCore;
-
 
 namespace IKEA.PL
 {
@@ -19,6 +20,13 @@ namespace IKEA.PL
             {
                 optionsbuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            // Apply Dependency Injection to IDepartmentRepository
+            // When IDepartmentRepository Object is needed return object of DepartmentRepository
+            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+
+
+            builder.Services.AddScoped<IDepartmentServices, DepartmentService>();
 
             var app = builder.Build();
 

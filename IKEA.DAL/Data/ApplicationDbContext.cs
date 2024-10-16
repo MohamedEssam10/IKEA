@@ -1,4 +1,4 @@
-﻿using IKEA.DAL.Models;
+﻿using IKEA.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

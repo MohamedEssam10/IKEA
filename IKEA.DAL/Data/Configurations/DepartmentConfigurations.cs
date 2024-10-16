@@ -1,4 +1,4 @@
-﻿using IKEA.DAL.Models;
+﻿using IKEA.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -14,8 +14,8 @@ namespace IKEA.DAL.Data.Configurations
         public void Configure(EntityTypeBuilder<Department> builder)
         {
             // HasComputedColumnSql(); Executes GETDATE() every time the recored is modified
-            builder.Property(D => D.LastModifiedOn).HasComputedColumnSql("GETDATE()");
-            builder.Property(d => d.CreatedOn).HasDefaultValueSql("GETDATE()");
+            builder.Property(D => D.LastModifiedOn).HasComputedColumnSql("GETUTCDATE()");
+            builder.Property(d => d.CreatedOn).HasDefaultValueSql("GETUTCDATE()");
         }
     }
 }
