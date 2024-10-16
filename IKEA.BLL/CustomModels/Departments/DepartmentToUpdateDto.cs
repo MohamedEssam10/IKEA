@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IKEA.DAL.Models
+namespace IKEA.BLL.CustomModels.Departments
 {
-    public class Department : ModelBase
+    public class DepartmentToUpdateDto
     {
+        public int Id { get; set; }
         public string Name { get; set; } = null!;
         public string Code { get; set; } = null!;
         public string Description { get; set; } = null!;

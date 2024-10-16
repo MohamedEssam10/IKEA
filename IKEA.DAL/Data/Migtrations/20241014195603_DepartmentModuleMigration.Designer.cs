@@ -25,7 +25,7 @@ namespace IKEA.DAL.Data.Migtrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("IKEA.DAL.Models.Department", b =>
+            modelBuilder.Entity("IKEA.DAL.Entities.Department", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
