@@ -1,52 +1,42 @@
-﻿@model DepartmentDetailsToReturnDto
+﻿@using IKEA.BLL.CustomModels.Employees
+@model EmployeeDetailsToReturnDto
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Delete";
 }
 
-<h1 class="mb-4">@ViewData["Title"]</h1>
+<h1>Are You Sure You Want To Delete?</h1>
 
-@* <p>Id : @Model.Id</p>
-<p>Code : @Model.Code</p>
-<p>Name : @Model.Name</p>
-<p>Date Of Creation: @Model.CreationDate</p>
-<p>Description: @Model.Description</p>
-<p>CreatedOn: @Model.CreatedOn</p>
-<p>CreatedBy: @Model.CreatedBy</p>
-<p>LastModifiedBy: @Model.LastModifiedBy</p>
-<p>LastModifiedOn: @Model.LastModifiedOn</p>
-<p>IsDeletd: @Model.IsDeleted</p> *@
+<br />
+<br />
 
-<!-- Department Details Card -->
+
 <div class="card shadow-sm mb-4">
     <div class="card-header bg-dark text-white text-center">
-        <h4>Department Details</h4>
+        <h4>Emplyee Details</h4>
     </div>
     <div class="card-body">
-        <!-- Department Code and Name -->
         <div class="row mb-3">
-            <div class="col-md-6">
-                <label asp-for="Code" class="form-label">Code</label>
-                <input class="form-control" asp-for="Code" readonly>
-            </div>
             <div class="col-md-6">
                 <label asp-for="Name" class="form-label">Name</label>
                 <input class="form-control" asp-for="Name" readonly>
             </div>
+            <div class="col-md-6">
+                <label asp-for="Age" class="form-label">Age</label>
+                <input class="form-control" asp-for="Age" readonly>
+            </div>
         </div>
 
-        <!-- Creation Date and Description -->
         <div class="row mb-3">
             <div class="col-md-6">
-                <label asp-for="CreationDate" class="form-label">Creation Date</label>
-                <input class="form-control" asp-for="CreationDate" readonly>
+                <label asp-for="Salary" class="form-label">Salary</label>
+                <input class="form-control" asp-for="Salary" readonly>
             </div>
             <div class="col-md-6">
-                <label asp-for="Description" class="form-label">Description</label>
-                <textarea class="form-control" asp-for="Description" rows="3" readonly></textarea>
+                <label asp-for="Gender" class="form-label">Gender</label>
+                <textarea class="form-control" asp-for="Gender" rows="3" readonly></textarea>
             </div>
         </div>
 
-        <!-- Created and Modified Info -->
         <div class="row mb-3">
             <div class="col-md-6">
                 <label asp-for="CreatedBy" class="form-label">Created By</label>
@@ -69,18 +59,11 @@
         </div>
 
         <!-- Action Buttons -->
-        <div class="text-center mt-4">
-            <a asp-action="Edit" class="btn btn-outline-primary" asp-route-id="@Model.Id">
-                <i class="fas fa-edit"></i> Edit
-            </a>
+        <form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="text-center mt-4">
+            <input type="Submit" value="Delete" class="btn btn-danger"/> |
             <a asp-action="Index" class="btn btn-outline-secondary">
-                <i class="fas fa-arrow-left"></i> Back to list
+                <i class="fas fa-arrow-left"></i> Cancel
             </a>
-        </div>
+        </form>
     </div>
 </div>
-
-
-
-
-

@@ -1,4 +1,5 @@
 ﻿using IKEA.DAL.Entities;
+using IKEA.DAL.Entities.Departmetns;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

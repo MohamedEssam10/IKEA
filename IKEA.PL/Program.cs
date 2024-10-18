@@ -1,6 +1,9 @@
 using IKEA.BLL.Services.Departments;
+using IKEA.BLL.Services.Employees;
 using IKEA.DAL.Data;
+using IKEA.DAL.Repositories.Common;
 using IKEA.DAL.Repositories.Departments;
+using IKEA.DAL.Repositories.Employees;
 using Microsoft.EntityFrameworkCore;
 
 namespace IKEA.PL
@@ -24,9 +27,12 @@ namespace IKEA.PL
             // Apply Dependency Injection to IDepartmentRepository
             // When IDepartmentRepository Object is needed return object of DepartmentRepository
             builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-
+            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+           
 
             builder.Services.AddScoped<IDepartmentServices, DepartmentService>();
+            builder.Services.AddScoped<IEmployeeServices, EmployeeServices>();
+
 
             var app = builder.Build();
 

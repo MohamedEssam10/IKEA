@@ -1,0 +1,45 @@
+﻿@using IKEA.PL.ViewModels.Departments
+@model DepartmentEditViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly"></div>
+    <!-- Department Code -->
+    <div class="mb-3">
+        <label asp-for="Code" class="form-label">Department Code</label>
+        <input type="text" class="form-control" asp-for="Code">
+        <span asp-validation-for="Code" class="text-danger"></span>
+    </div>
+    <!-- Department Name -->
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Department Name</label>
+        <input type="text" class="form-control" asp-for="Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">Description</label>
+        <input type="text" class="form-control" asp-for="Description">
+        <span asp-validation-for="Description" class="text-danger"></span>
+
+    </div>
+    <div class="mb-3">
+        <label asp-for="CreationDate" class="form-label">CreationDate</label>
+        <input type="date" class="form-control" asp-for="CreationDate">
+        <span asp-validation-for="CreationDate" class="text-danger"></span>
+
+    </div>
+    <!-- Submit Button -->
+    <input type="submit" value="Save" class="btn btn-primary" />
+    <a asp-action="Index" class="btn btn-light">Back to list</a>
+</form>
+
+
+
+
+
+
+

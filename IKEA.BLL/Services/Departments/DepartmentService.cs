@@ -1,5 +1,6 @@
 ﻿using IKEA.BLL.CustomModels.Departments;
-using IKEA.DAL.Entities;
+using IKEA.DAL.Entities.Departmetns;
+using IKEA.DAL.Repositories.Common;
 using IKEA.DAL.Repositories.Departments;
 using Microsoft.EntityFrameworkCore;
 
