@@ -1,0 +1,157 @@
+﻿@using IKEA.BLL.CustomModels.Employees
+@using IKEA.DAL.Common.Enums
+@model EmployeeDetailsToReturnDto
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 class="mb-4">@ViewData["Title"]</h1>
+
+@* public int Id { get; set; }
+        public int CreatedBy { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public int LastModifiedBy { get; set; }
+        public DateTime LastModifiedOn { get; set; }
+        public bool IsDeleted { get; set; }
+
+
+
+
+        public string Name { get; set; } = null!;
+        public string Address { get; set; } = null!;
+        public string Email { get; set; } = null!;
+        public string PhoneNumber { get; set; } = null!;
+        public int Age { get; set; }
+        public double Salary { get; set; }
+        public DateOnly HiringDate { get; set; }
+        public Gender Gender { get; set; }
+        public EmployeeType EmployeeType { get; set; } *@
+
+<!-- Department Details Card -->
+<div class="card shadow-sm mb-4">
+    <div class="card-header bg-dark text-white text-center">
+        <h4>Department Details</h4>
+    </div>
+    <div class="card-body">
+        <!-- Department Code and Name -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label asp-for="Name" class="form-label">Name</label>
+                <input class="form-control" asp-for="Name" readonly>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Email" class="form-label">Email</label>
+                <input class="form-control" asp-for="Email" readonly>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label asp-for="Age" class="form-label">Age</label>
+                <input class="form-control" asp-for="Age" readonly>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Salary" class="form-label">Salary</label>
+                <input class="form-control" asp-for="Salary" readonly>
+            </div>
+        </div>
+
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label asp-for="HiringDate" class="form-label">Hiring Date</label>
+                <input class="form-control" asp-for="HiringDate" readonly>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Gender" class="form-label">Gender</label>
+                <input asp-for ="Gender" class="form-control" disabled>
+            </div>
+        </div>
+
+
+        <label class="form-label">Gender</label>
+        <div>
+            
+                    
+            <input type="radio" name="Gender" id="Male" value="Male" disabled
+            @if (@Model.Gender == Gender.Male)
+            {
+                <text>checked</text>
+            }
+            />
+            <label for="Male">Male</label>
+
+        </div>
+        <div>
+            <input type="radio" name="Gender" id="Female" value="Female" disabled
+            @if (@Model.Gender == Gender.Female)
+            {
+                <text>checked</text>
+            }
+            />
+            <label for="Female">Female</label>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label asp-for="EmployeeType" class="form-label">EmployeeType</label>
+                <input class="form-control" asp-for="EmployeeType" readonly>
+            </div>
+            <select name="EmployeeType" id="EmployeeType" class="form-control" readonly>
+                <option value="">Select Employee Type</option>
+                <option value="FullTime">Full-Time</option>
+                <option value="PartTime">Part-Time</option>
+                <option value="Contract">Contract</option>
+            </select>
+        </div>
+
+        <!-- Creation Date and Description -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label asp-for="Address" class="form-label">Address</label>
+                <input class="form-control" asp-for="Address" readonly>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+                <input class="form-control" asp-for="PhoneNumber" readonly>
+            </div>
+        </div>
+
+        <!-- Created and Modified Info -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label asp-for="CreatedBy" class="form-label">Created By</label>
+                <input class="form-control" asp-for="CreatedBy" readonly>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="CreatedOn" class="form-label">Created On</label>
+                <input class="form-control" asp-for="CreatedOn" readonly>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label asp-for="LastModifiedBy" class="form-label">Modified By</label>
+                <input class="form-control" asp-for="LastModifiedBy" readonly>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="LastModifiedOn" class="form-label">Modified On</label>
+                <input class="form-control" asp-for="LastModifiedOn" readonly>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="text-center mt-4">
+            <a asp-action="Edit" class="btn btn-outline-primary" asp-route-id="@Model.Id">
+                <i class="fas fa-edit"></i> Edit
+            </a>
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left"></i> Back to list
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+
+

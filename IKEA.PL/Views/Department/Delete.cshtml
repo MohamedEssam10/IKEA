@@ -1,20 +1,13 @@
 ﻿@model DepartmentDetailsToReturnDto
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Delete";
 }
 
-<h1 class="mb-4">@ViewData["Title"]</h1>
+<h1>Are You Sure You Want To Delete?</h1>
 
-@* <p>Id : @Model.Id</p>
-<p>Code : @Model.Code</p>
-<p>Name : @Model.Name</p>
-<p>Date Of Creation: @Model.CreationDate</p>
-<p>Description: @Model.Description</p>
-<p>CreatedOn: @Model.CreatedOn</p>
-<p>CreatedBy: @Model.CreatedBy</p>
-<p>LastModifiedBy: @Model.LastModifiedBy</p>
-<p>LastModifiedOn: @Model.LastModifiedOn</p>
-<p>IsDeletd: @Model.IsDeleted</p> *@
+<br />
+<br />
+
 
 <!-- Department Details Card -->
 <div class="card shadow-sm mb-4">
@@ -69,18 +62,11 @@
         </div>
 
         <!-- Action Buttons -->
-        <div class="text-center mt-4">
-            <a asp-action="Edit" class="btn btn-outline-primary" asp-route-id="@Model.Id">
-                <i class="fas fa-edit"></i> Edit
-            </a>
+        <form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="text-center mt-4">
+            <input type="Submit" value="Delete" class="btn btn-danger"/> |
             <a asp-action="Index" class="btn btn-outline-secondary">
-                <i class="fas fa-arrow-left"></i> Back to list
+                <i class="fas fa-arrow-left"></i> Cancel
             </a>
-        </div>
+        </form>
     </div>
 </div>
-
-
-
-
-

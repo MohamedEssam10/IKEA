@@ -1,6 +1,4 @@
-﻿
-
-namespace IKEA.DAL.Entities
+﻿namespace IKEA.DAL.Entities.Departmetns
 {
     public class Department : ModelBase
     {
