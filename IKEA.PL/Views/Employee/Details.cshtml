@@ -7,25 +7,6 @@
 
 <h1 class="mb-4">@ViewData["Title"]</h1>
 
-@* public int Id { get; set; }
-        public int CreatedBy { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public int LastModifiedBy { get; set; }
-        public DateTime LastModifiedOn { get; set; }
-        public bool IsDeleted { get; set; }
-
-
-
-
-        public string Name { get; set; } = null!;
-        public string Address { get; set; } = null!;
-        public string Email { get; set; } = null!;
-        public string PhoneNumber { get; set; } = null!;
-        public int Age { get; set; }
-        public double Salary { get; set; }
-        public DateOnly HiringDate { get; set; }
-        public Gender Gender { get; set; }
-        public EmployeeType EmployeeType { get; set; } *@
 
 <!-- Department Details Card -->
 <div class="card shadow-sm mb-4">
@@ -97,13 +78,16 @@
                 <label asp-for="EmployeeType" class="form-label">EmployeeType</label>
                 <input class="form-control" asp-for="EmployeeType" readonly>
             </div>
-            <select name="EmployeeType" id="EmployeeType" class="form-control" readonly>
-                <option value="">Select Employee Type</option>
-                <option value="FullTime">Full-Time</option>
-                <option value="PartTime">Part-Time</option>
-                <option value="Contract">Contract</option>
-            </select>
+            <div class="col-md-6">
+                <label asp-for="Department" class="form-label">Department Name </label>
+                <input class="form-control" asp-for="Department"  readonly>
+            </div>
         </div>
+
+        
+     
+
+
 
         <!-- Creation Date and Description -->
         <div class="row mb-3">

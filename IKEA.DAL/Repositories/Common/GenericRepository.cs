@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace IKEA.DAL.Repositories.Common
 {
-    public class GenericRepository<T> where T : ModelBase
+    public class GenericRepository<T> : IGenericRepository<T> where T : ModelBase
     {
         private protected readonly ApplicationDbContext dbcontext;
 

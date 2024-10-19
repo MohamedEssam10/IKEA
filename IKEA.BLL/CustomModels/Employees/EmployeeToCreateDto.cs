@@ -1,4 +1,5 @@
 ﻿using IKEA.DAL.Common.Enums;
+using IKEA.DAL.Entities.Departmetns;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,5 +23,7 @@ namespace IKEA.BLL.CustomModels.Employees
         public int CreatedBy { get; set; }
         public DateTime LastModifiedOn { get; set; }
         public int LastModifiedBy { get; set; }
+        public int? DepartmentId { get; set; }
+        public string? Department { get; set; }
     }
 }

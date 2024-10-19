@@ -1,8 +1,10 @@
-﻿@using IKEA.PL.ViewModels.Empolyees
+﻿@using IKEA.DAL.Common.Enums
+@using IKEA.PL.ViewModels.Empolyees
 @model EmployeeEditViewModel
 
 @{
     ViewData["Title"] = "Edit";
+    var Departments = ViewData["Departments"] as IEnumerable<DepartmentToReturnDto>;
 }
 
 @* 
@@ -66,11 +68,19 @@
     <div class="mb-3">
         <label class="form-label">Gender</label>
         <div>
-            <input type="radio" name="Gender" id="Male" value="Male" />
+            <input type="radio" name="Gender" id="Male" value="Male"
+            @if (@Model.Gender == Gender.Male)
+            {
+                <text>checked</text>
+            }/>
             <label for="Male">Male</label>
         </div>
         <div>
-            <input type="radio" name="Gender" id="Female" value="Female" />
+            <input type="radio" name="Gender" id="Female" value="Female" 
+            @if (@Model.Gender == Gender.Female)
+            {
+                <text>checked</text>
+            }/>
             <label for="Female">Female</label>
         </div>
         
@@ -82,9 +92,23 @@
             <option value="">Select Employee Type</option>
             <option value="FullTime">Full-Time</option>
             <option value="PartTime">Part-Time</option>
-            <option value="Contract">Contract</option>
         </select>
         <span asp-validation-for="EmployeeType" class="text-danger"></span>
+
+        @* Department *@
+
+        <label class="form-label" for="DepartmentId">Department</label>
+        <select name="DepartmentId" id="DepartmentId" class="form-control">
+            <option value="@null">Select  Department</option>
+            @if (Departments != null)
+            {
+                @foreach (var department in Departments)
+                {
+                    <option value="@department.Id">@department.Name</option>
+                }
+            }
+        </select>
+
 
     </div>
     <!-- Submit Button -->
@@ -92,8 +116,9 @@
     <a asp-action="Index" class="btn btn-light">Back to list</a>
 </form>
 
-
-
+@section ValidationScripts {
+    <partial name="_ValidationScriptsPartial">
+}
 
 
 

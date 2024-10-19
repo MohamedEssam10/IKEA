@@ -3,6 +3,7 @@ using IKEA.DAL.Entities;
 using IKEA.DAL.Entities.Departmetns;
 using IKEA.DAL.Entities.Employees;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +17,13 @@ namespace IKEA.DAL.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    string ConnectionString = "Server = .; Database = IKEA; Trusted_Connection = True; TrustServerCertificate = True;";
-        //    optionsBuilder.UseSqlServer(ConnectionString);
-        //}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies();
+
+            //    string ConnectionString = "Server = .; Database = IKEA; Trusted_Connection = True; TrustServerCertificate = True;";
+            //    optionsBuilder.UseSqlServer(ConnectionString);
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

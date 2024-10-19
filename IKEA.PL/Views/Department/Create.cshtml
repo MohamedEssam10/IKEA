@@ -19,6 +19,8 @@
 
         <label class="from-label">Description</label>
             <textarea name="Description" id="Description" class="form-control" ></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+
 
         <label class="from-label">Creation Date</label>
         <input type="date" name="CreationDate" id="CreationDate" class="form-control" />
@@ -33,3 +35,6 @@
 
 </form>
 
+@section ValidationScripts {
+    <partial name="_ValidationScriptsPartial">
+}

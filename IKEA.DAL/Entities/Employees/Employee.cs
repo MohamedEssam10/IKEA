@@ -1,4 +1,5 @@
 ﻿using IKEA.DAL.Common.Enums;
+using IKEA.DAL.Entities.Departmetns;
 using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace IKEA.DAL.Entities.Employees
         public DateOnly HiringDate { get; set; }
         public Gender Gender { get; set; }
         public EmployeeType EmployeeType { get; set; }
-
+        public virtual Department? Department { get; set; }  
+        public int? DepartmentId { get; set; }
     }
 }

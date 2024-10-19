@@ -34,7 +34,7 @@
 
                         <!----------------Department---------------->
                         <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Department" asp-action="Index">Departmetns</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Department" asp-action="Index">Departments</a>
                         </li>
                         <!----------------Employees---------------->
                         <li class="nav-item">
@@ -62,5 +62,6 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("ValidationScripts", required: false);
 </body>
 </html>

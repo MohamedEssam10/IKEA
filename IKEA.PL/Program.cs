@@ -1,7 +1,6 @@
 using IKEA.BLL.Services.Departments;
 using IKEA.BLL.Services.Employees;
 using IKEA.DAL.Data;
-using IKEA.DAL.Repositories.Common;
 using IKEA.DAL.Repositories.Departments;
 using IKEA.DAL.Repositories.Employees;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +15,7 @@ namespace IKEA.PL
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
+            
 
             // Apply Dependency Injection to DbContext
             builder.Services.AddDbContext<ApplicationDbContext>((optionsbuilder) =>
@@ -32,7 +31,7 @@ namespace IKEA.PL
 
             builder.Services.AddScoped<IDepartmentServices, DepartmentService>();
             builder.Services.AddScoped<IEmployeeServices, EmployeeServices>();
-
+            
 
             var app = builder.Build();
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IKEA.DAL.Entities.Departmetns;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,5 +15,9 @@ namespace IKEA.BLL.CustomModels.Departments
         public string Code { get; set; } = null!;
         [Display(Name = "Date Of Creation")]
         public DateOnly CreationDate { get; set; }
+        public int? DepartmentId { get; set; }
+        public string Department { get; set; } = null!;
+
+
     }
 }

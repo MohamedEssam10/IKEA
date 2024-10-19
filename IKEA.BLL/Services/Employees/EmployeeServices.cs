@@ -1,4 +1,5 @@
 ﻿using IKEA.BLL.CustomModels.Employees;
+using IKEA.DAL.Entities.Departmetns;
 using IKEA.DAL.Entities.Employees;
 using IKEA.DAL.Repositories.Employees;
 using Microsoft.EntityFrameworkCore;
@@ -29,7 +30,9 @@ namespace IKEA.BLL.Services.Employees
                 EmployeeType = employeeDto.EmployeeType,
                 CreatedBy = 1,
                 LastModifiedBy = 1,
-                LastModifiedOn = DateTime.UtcNow
+                LastModifiedOn = DateTime.UtcNow,
+                DepartmentId = employeeDto.DepartmentId
+                
             };
 
             return repository.Add(CreatedEmployee);
@@ -45,7 +48,7 @@ namespace IKEA.BLL.Services.Employees
 
         public IEnumerable<EmployeeToReturnDto> GetAllEmployees()
         {
-            var employee = repository.GetAllAsQueryable().Where(E => !E.IsDeleted).Select(E => new EmployeeToReturnDto
+            var employee = repository.GetAllAsQueryable().Where(E => !E.IsDeleted).Include(E => E.Department).Select(E => new EmployeeToReturnDto
             {
                 Id = E.Id,
                 Name = E.Name,
@@ -57,6 +60,8 @@ namespace IKEA.BLL.Services.Employees
                 Email = E.Email,
                 Gender = E.Gender,
                 EmployeeType = E.EmployeeType,
+                DepartmentId = E.DepartmentId,
+                Department = E.Department.Name
 
             }).AsNoTracking().ToList();
 
@@ -85,7 +90,9 @@ namespace IKEA.BLL.Services.Employees
                 PhoneNumber = employee.PhoneNumber,
                 Email = employee.Email,
                 Gender = employee.Gender,
-                EmployeeType = employee.EmployeeType
+                EmployeeType = employee.EmployeeType,
+                DepartmentId = employee.DepartmentId,
+                Department = employee.Department.Name
             };
         }
 
@@ -103,7 +110,8 @@ namespace IKEA.BLL.Services.Employees
                 Gender = employeeDto.Gender,
                 EmployeeType = employeeDto.EmployeeType,
                 LastModifiedBy = 1,
-                LastModifiedOn = DateTime.UtcNow
+                LastModifiedOn = DateTime.UtcNow,
+                DepartmentId = employeeDto.DepartmentId
             };
 
             return repository.Update(UpdatedEmployee);
