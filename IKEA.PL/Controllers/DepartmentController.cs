@@ -1,5 +1,6 @@
 ﻿using IKEA.BLL.CustomModels.Departments;
 using IKEA.BLL.Services.Departments;
+using IKEA.DAL.Entities.Employees;
 using IKEA.PL.ViewModels.Departments;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,12 +40,20 @@ namespace IKEA.PL.Controllers
         }
 
         [HttpPost]
+        //[ValidateAntiForgeryToken]
         public IActionResult Create(DepartmentToCreateDto department)
         {
             if (!ModelState.IsValid)
-                return View("Error");
+            {
+                return View();
+            }
 
             var Result = departmentservice.CreateDepartment(department);
+
+            if (Result > 0)
+                TempData["Message"] = "Department has been Created Successfully.";
+            else
+                TempData["Message"] = "An Error Ocurred While Creating a new Department.";
             return RedirectToAction("Index");
         }
         #endregion
@@ -59,6 +68,7 @@ namespace IKEA.PL.Controllers
         //}
 
         [HttpPost]
+        //[ValidateAntiForgeryToken]
         public IActionResult Delete(int Id)
         {
             var deleted = departmentservice.DeleteDepartment(Id);
@@ -90,6 +100,8 @@ namespace IKEA.PL.Controllers
         }
 
         [HttpPost]
+        //[ValidateAntiForgeryToken]
+
         public IActionResult Edit([FromRoute] int Id, DepartmentEditViewModel department)
         {
             if (!ModelState.IsValid)

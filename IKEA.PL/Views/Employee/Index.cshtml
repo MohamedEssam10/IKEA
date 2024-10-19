@@ -1,10 +1,10 @@
 ﻿@using IKEA.BLL.CustomModels.Employees
 @model IEnumerable<EmployeeToReturnDto>
 @{
-    ViewData["Title"] = "Departments";
+    ViewData["Title"] = "Employees";
 }
 
-<h1>Departments</h1>
+<h1>Employees</h1>
 
 <br />
 <br />
@@ -20,6 +20,8 @@
                 <th>@Html.DisplayNameFor(D => D.Name)</th>
                 <th>@Html.DisplayNameFor(D => D.Email)</th>
                 <th>@Html.DisplayNameFor(D => D.Age)</th>
+                <th>@Html.DisplayNameFor(D => D.Department)</th>
+
                 <th>Details</th>
                 <th>Update</th>
                 <th>Delete</th>
@@ -57,31 +59,31 @@
                     <td>@employee.Name</td>
                     <td>@employee.Email</td>
                     <td>@employee.Age</td>
-                    <td>
-                        <a href="/Employee/Details/@employee.Id" class="btn btn-warning">
-                        <i class="fas fa-eye"></i>
-                            Details
-                        </a>
-                    </td>
-                    <td>
-                        <a href="/Employee/Edit/@employee.Id" class="btn btn-success">
-                            <i class="fas fa-edit"></i>Update
-                        </a>
-                    </td>
-                    <td>
-                        @* <a href="/Employee/Delete/@department.Id" class="btn btn-danger">
-                            <i class="fas fa-trash"></i>Delete
-                        </a> *@
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-@employee.Id">
-                            <i class="fas fa-trash"></i>Delete
-                        </button>
-                        
-                    </td>
+                    <td>@employee.Department</td>
+                    <partial name="_ButtonPartial" model="@employee.Id">
 
                 </tr>
             }
         </tbody>
     </table>
+
+    @if (!string.IsNullOrEmpty(TempData["Message"] as string))
+    {
+        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+            <div id="liveToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header bg-info text-white">
+                    <strong class="me-auto">Notification</strong>
+                    <small>Just now</small>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body bg-light text-dark fw-semibold p-3">
+                    @TempData["Message"]
+                </div>
+            </div>
+        </div>
+
+
+    }
 }
 else
 {

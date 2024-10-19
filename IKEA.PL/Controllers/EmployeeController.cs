@@ -1,6 +1,8 @@
 ﻿using IKEA.BLL.CustomModels.Employees;
+using IKEA.BLL.Services.Departments;
 using IKEA.BLL.Services.Employees;
 using IKEA.DAL.Common.Enums;
+using IKEA.DAL.Entities.Departmetns;
 using IKEA.PL.ViewModels.Empolyees;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,18 +35,31 @@ namespace IKEA.PL.Controllers
 
         #region Create
         [HttpGet]
-        public IActionResult Create()
+        
+        public IActionResult Create([FromServices]IDepartmentServices departmentservice)
         {
+            ViewData["Departments"] = departmentservice.GetAllDepartments();
+
             return View();
         }
 
         [HttpPost]
+        //[ValidateAntiForgeryToken]
+
         public IActionResult Create(EmployeeToCreateDto employee)
         {
             if (!ModelState.IsValid)
-                return View("Error");
+            {
+                return View();
+            }
 
             var Result = employeeservice.CreateEmployee(employee);
+
+            if (Result > 0)
+                TempData["Message"] = "Employee has been Created Successfully.";
+            else
+                TempData["Message"] = "An Error Ocurred While Creating a new Employee.";
+                
             return RedirectToAction("Index");
         }
         #endregion
@@ -59,6 +74,8 @@ namespace IKEA.PL.Controllers
         //}
 
         [HttpPost]
+        //[ValidateAntiForgeryToken]
+
         public IActionResult Delete(int Id)
         {
             var deleted = employeeservice.DeleteEmployee(Id);
@@ -77,8 +94,10 @@ namespace IKEA.PL.Controllers
 
         #region Update
         [HttpGet]
-        public IActionResult Edit(int Id)
+        public IActionResult Edit(int Id, [FromServices]IDepartmentServices departmentservice)
         {
+            ViewData["Departments"] = departmentservice.GetAllDepartments();
+
             var employee = employeeservice.GetEmployeeById(Id);
             return View(new EmployeeEditViewModel()
             {
@@ -90,12 +109,14 @@ namespace IKEA.PL.Controllers
                 Salary       = employee.Salary,
                 HiringDate   = employee.HiringDate,
                 Gender       = employee.Gender,
-                EmployeeType = employee.EmployeeType
-
+                EmployeeType = employee.EmployeeType,
+                DepartmentId = employee.DepartmentId
     });
         }
 
         [HttpPost]
+        //[ValidateAntiForgeryToken]
+
         public IActionResult Edit([FromRoute] int Id, EmployeeEditViewModel employee)
         {
             if (!ModelState.IsValid)
@@ -111,7 +132,8 @@ namespace IKEA.PL.Controllers
                 Salary       = employee.Salary,
                 HiringDate   = employee.HiringDate,
                 Gender       = employee.Gender,
-                EmployeeType = employee.EmployeeType
+                EmployeeType = employee.EmployeeType,
+                DepartmentId = employee.DepartmentId
 
             };
 

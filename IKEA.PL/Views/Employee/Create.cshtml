@@ -1,7 +1,10 @@
 ﻿@using IKEA.BLL.CustomModels.Employees
+@using IKEA.DAL.Entities.Departmetns
 @model EmployeeToCreateDto
+
 @{
     ViewData["Title"] = "Create";
+    var Departments = ViewData["Departments"] as IEnumerable<DepartmentToReturnDto>;
 }
 
 <h1 class="col-8 my-4">Create A New Employee</h1>
@@ -59,7 +62,21 @@
         </select>
         <span asp-validation-for="EmployeeType" class="text-danger"></span>
 
+        @* Department *@
 
+        <label class="form-label" for="DepartmentId">Department</label>
+        <select name="DepartmentId" id="DepartmentId"  class="form-control">
+            <option value="@null">Select  Department</option> 
+            @if(Departments != null)
+            {
+                @foreach(var department in Departments)
+                {
+                    <option value="@department.Id">@department.Name</option>
+                }
+            }
+        </select>
+        <span asp-validation-for="EmployeeType" class="text-danger"></span>
+        
     </div>
 
     <div class="mt-3 ms-auto">
@@ -69,3 +86,6 @@
 
 </form>
 
+@section ValidationScripts {
+    <partial name="_ValidationScriptsPartial">
+}
