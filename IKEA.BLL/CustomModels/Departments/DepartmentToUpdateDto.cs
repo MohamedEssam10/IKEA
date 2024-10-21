@@ -13,5 +13,6 @@ namespace IKEA.BLL.CustomModels.Departments
         public string Code { get; set; } = null!;
         public string Description { get; set; } = null!;
         public DateOnly CreationDate { get; set; }
+
     }
 }

@@ -1,6 +1,6 @@
-﻿using IKEA.BLL.CustomModels.Departments;
+﻿using AutoMapper;
+using IKEA.BLL.CustomModels.Departments;
 using IKEA.BLL.Services.Departments;
-using IKEA.DAL.Entities.Employees;
 using IKEA.PL.ViewModels.Departments;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,10 +13,12 @@ namespace IKEA.PL.Controllers
         private readonly IDepartmentServices departmentservice;
         private readonly ILogger<DepartmentController> logger;
         private readonly IWebHostEnvironment environment;
+        private readonly IMapper mapper;
 
-        
-        public DepartmentController(IDepartmentServices departmentservice, ILogger<DepartmentController> logger, IWebHostEnvironment environment)
+
+        public DepartmentController(IDepartmentServices departmentservice, ILogger<DepartmentController> logger, IWebHostEnvironment environment, IMapper mapper)
         {
+            this.mapper = mapper;
             this.departmentservice = departmentservice;
             this.logger = logger;
             this.environment = environment;
@@ -90,13 +92,10 @@ namespace IKEA.PL.Controllers
         public IActionResult Edit(int Id)
         {
             var department = departmentservice.GetDepartmentById(Id);
-            return View(new DepartmentEditViewModel()
-            {
-                Code = department.Code,
-                Name = department.Name,
-                Description = department.Description,
-                CreationDate = department.CreationDate
-            });
+
+            var departmentVM = mapper.Map<DepartmentDetailsToReturnDto, DepartmentEditViewModel>(department);
+            return View(departmentVM);
+
         }
 
         [HttpPost]
@@ -106,14 +105,7 @@ namespace IKEA.PL.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest();
-            var departmentToUpdate = new DepartmentToUpdateDto()
-            {
-                Id = Id,
-                Code = department.Code,
-                Name = department.Name,
-                Description = department.Description,
-                CreationDate = department.CreationDate
-            };
+            var departmentToUpdate = mapper.Map<DepartmentEditViewModel,DepartmentToUpdateDto>(department);
 
             departmentservice.UpdateDepartment(departmentToUpdate);
             return RedirectToAction("Index");

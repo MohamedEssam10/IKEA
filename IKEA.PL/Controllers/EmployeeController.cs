@@ -26,10 +26,19 @@ namespace IKEA.PL.Controllers
 
         #region Index
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(string search)
         {
-            var employees = employeeservice.GetAllEmployees();
-            return View(employees);
+            var employees = employeeservice.GetEmployees(search);
+
+            //if (HttpContext.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            //{
+            //    // Return partial view for AJAX requests
+            //    return PartialView("_EmployeeListPartial", employees);
+            //}
+            if (string.IsNullOrEmpty(search))
+                return View(employees);
+
+            return PartialView("Partials/_EmployeeListPartial", employees);  
         }
         #endregion
 
@@ -133,7 +142,8 @@ namespace IKEA.PL.Controllers
                 HiringDate   = employee.HiringDate,
                 Gender       = employee.Gender,
                 EmployeeType = employee.EmployeeType,
-                DepartmentId = employee.DepartmentId
+                DepartmentId = employee.DepartmentId,
+                Image        = employee.Image
 
             };
 

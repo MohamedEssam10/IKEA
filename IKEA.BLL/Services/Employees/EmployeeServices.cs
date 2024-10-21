@@ -1,18 +1,21 @@
-﻿using IKEA.BLL.CustomModels.Employees;
+﻿using IKEA.BLL.Common.Services.Attachments;
+using IKEA.BLL.CustomModels.Employees;
 using IKEA.DAL.Entities.Departmetns;
 using IKEA.DAL.Entities.Employees;
 using IKEA.DAL.Repositories.Employees;
+using IKEA.DAL.Unit_of_work;
 using Microsoft.EntityFrameworkCore;
 
 namespace IKEA.BLL.Services.Employees
 {
     public class EmployeeServices : IEmployeeServices
     {
-        private readonly IEmployeeRepository repository;
-
-        public EmployeeServices(IEmployeeRepository repository)
+        private readonly IUnitOfWork unitOfWork;
+        private readonly IAttachmentService attachmentservice;
+        public EmployeeServices(IUnitOfWork unitOfWork, IAttachmentService attachmentservice)
         {
-            this.repository = repository;
+            this.unitOfWork = unitOfWork;
+            this.attachmentservice = attachmentservice;
         }
 
         public int CreateEmployee(EmployeeToCreateDto employeeDto)
@@ -31,24 +34,30 @@ namespace IKEA.BLL.Services.Employees
                 CreatedBy = 1,
                 LastModifiedBy = 1,
                 LastModifiedOn = DateTime.UtcNow,
-                DepartmentId = employeeDto.DepartmentId
+                DepartmentId = employeeDto.DepartmentId,
                 
             };
 
-            return repository.Add(CreatedEmployee);
+            if (employeeDto.Image is not null)
+                CreatedEmployee.Image = attachmentservice.Upload(employeeDto.Image, "Images");
+
+            unitOfWork.EmployeeRepository.Add(CreatedEmployee);
+            return unitOfWork.Complete();
         }
 
         public bool DeleteEmployee(int Id)
         {
-            var employee = repository.GetById(Id);
+            var EmployeeRepo = unitOfWork.EmployeeRepository;
+            var employee = EmployeeRepo.GetById(Id);
             if (employee == null) return false;
 
-            return repository.Delete(employee) > 0;
+            EmployeeRepo.Delete(employee);
+            return unitOfWork.Complete() > 0;
         }
 
-        public IEnumerable<EmployeeToReturnDto> GetAllEmployees()
+        public IEnumerable<EmployeeToReturnDto> GetEmployees(string search)
         {
-            var employee = repository.GetAllAsQueryable().Where(E => !E.IsDeleted).Include(E => E.Department).Select(E => new EmployeeToReturnDto
+            var employee = unitOfWork.EmployeeRepository.GetAllAsQueryable().Where(E => !E.IsDeleted && (string.IsNullOrEmpty(search) || E.Name.Contains(search)) ).Include(E => E.Department).Select(E => new EmployeeToReturnDto
             {
                 Id = E.Id,
                 Name = E.Name,
@@ -61,7 +70,8 @@ namespace IKEA.BLL.Services.Employees
                 Gender = E.Gender,
                 EmployeeType = E.EmployeeType,
                 DepartmentId = E.DepartmentId,
-                Department = E.Department.Name
+                Department = E.Department.Name,
+                Image = E.Image
 
             }).AsNoTracking().ToList();
 
@@ -70,7 +80,7 @@ namespace IKEA.BLL.Services.Employees
 
         public EmployeeDetailsToReturnDto? GetEmployeeById(int id)
         {
-            var employee = repository.GetById(id);
+            var employee = unitOfWork.EmployeeRepository.GetById(id);
 
             if (employee is null)
                 return null;
@@ -92,7 +102,8 @@ namespace IKEA.BLL.Services.Employees
                 Gender = employee.Gender,
                 EmployeeType = employee.EmployeeType,
                 DepartmentId = employee.DepartmentId,
-                Department = employee.Department.Name
+                Department = employee.Department.Name,
+                Image = employee.Image
             };
         }
 
@@ -111,10 +122,12 @@ namespace IKEA.BLL.Services.Employees
                 EmployeeType = employeeDto.EmployeeType,
                 LastModifiedBy = 1,
                 LastModifiedOn = DateTime.UtcNow,
-                DepartmentId = employeeDto.DepartmentId
+                DepartmentId = employeeDto.DepartmentId,
+                Image = employeeDto.Image
             };
 
-            return repository.Update(UpdatedEmployee);
+            unitOfWork.EmployeeRepository.Update(UpdatedEmployee);
+            return unitOfWork.Complete();
         }
     }
 }
