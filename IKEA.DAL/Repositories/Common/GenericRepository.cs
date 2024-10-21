@@ -40,27 +40,19 @@ namespace IKEA.DAL.Repositories.Common
 
             return dbcontext.Set<T>().Find(Id);
         }
-        public int Add(T Entity)
-        {
-            dbcontext.Set<T>().Add(Entity);
-            return dbcontext.SaveChanges(); // returns how many rows affected
-        }
-        public int Update(T Entity)
-        {
-            dbcontext.Set<T>().Update(Entity);
-            return dbcontext.SaveChanges();
-        }
-        public int Delete(T Entity)
+        public void Add(T Entity) => dbcontext.Set<T>().Add(Entity);
+                   
+        public void Update(T Entity) => dbcontext.Set<T>().Update(Entity);
+        
+        public void Delete(T Entity)
         {
             if(Entity is Employee)
             {
                 Entity.IsDeleted = true;
                 Update(Entity); 
-                return dbcontext.SaveChanges();
             }
 
             dbcontext.Set<T>().Remove(Entity);
-            return dbcontext.SaveChanges();
         }
     }
 }

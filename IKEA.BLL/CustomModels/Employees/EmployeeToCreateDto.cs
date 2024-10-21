@@ -1,5 +1,6 @@
 ﻿using IKEA.DAL.Common.Enums;
 using IKEA.DAL.Entities.Departmetns;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,5 +26,6 @@ namespace IKEA.BLL.CustomModels.Employees
         public int LastModifiedBy { get; set; }
         public int? DepartmentId { get; set; }
         public string? Department { get; set; }
+        public IFormFile? Image {  get; set; }
     }
 }
